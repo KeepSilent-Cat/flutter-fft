@@ -53,7 +53,7 @@ public class PitchModel implements PitchInterface {
                 ArrayList<Object> returnData = new ArrayList<>(); // VARIABLE THAT WILL CONTAIN THE DATA TO BE RETURNED TO FLUTTER
 
                 short[] bufferData = audioModel.getAudioData(); // GETTING "SHORT" BUFFER ARRAY, IN ORDER TO CONVERT IT TO A FLOAT ARRAY (FLOAT ARRAY IS WHAT THE PITCH DETECTOR TAKES AS INPUT)
-                float[] floatData = new float[FlutterFftPlugin.bufferSize / 2]; // INSTANTIATING THE FLOAT ARRAY
+                
 
                 for (int i = 0; i < bufferData.length; i++) { // MAKING THE TYPE CONVERSION
                     floatData[i] = (float) bufferData[i];
