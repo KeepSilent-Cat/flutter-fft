@@ -125,7 +125,10 @@ public class FlutterFftPlugin implements ActivityAware, FlutterPlugin, PluginReg
                 Integer numChannels = call.argument("numChannels"); // NUMBER OF CHANNELS, DEFAULT: 1
                 int androidAudioSource = call.argument("androidAudioSource"); // AUDIO SOURCE, DEFAULT: MICROPHONE
                 double tolerance = call.argument("tolerance"); // HOW APART CAN THE CURRENT PITCH AND TARGET PITCH BE TO CONSIDER IT ON PITCH, DEFAULT: 1.0
-                startRecorder(tuning, numChannels, sampleRate, androidAudioSource, (float) tolerance, result); // CALL LOCAL "startRecorder" METHOD (JAVA IMPLEMENTATION)
+                // 获取 sensitivity 参数，默认值为 0.7
+                double sensitivity = call.argument("sensitivity") != null ? call.argument("sensitivity") : 0.7;
+                // 调用 startRecorder 方法，传递 sensitivity 参数
+                startRecorder(tuning, numChannels, sampleRate, androidAudioSource, (float) tolerance, (float) sensitivity, result); // CALL LOCAL "startRecorder" METHOD (JAVA IMPLEMENTATION)
             });
           break;
       case "stopRecorder":
