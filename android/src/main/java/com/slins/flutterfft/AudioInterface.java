@@ -1,7 +1,6 @@
 package com.slins.flutterfft;
 
 import java.util.List;
-import be.tarsos.dsp.pitch.FastYin;
 
 import io.flutter.plugin.common.MethodChannel;
 
