@@ -108,9 +108,12 @@ public class PitchModel implements PitchInterface {
 
     public void setSensitivity(float sensitivity) {
         this.sensitivity = sensitivity;
-        // 根据灵敏度调整 FastYin 检测器的阈值
-        if (pitchDetector != null && pitchDetector instanceof FastYin) {
-            ((FastYin) pitchDetector).setThreshold(0.15f * (2 - sensitivity));
+         // 使用灵敏度调整音频处理参数
+        if (pitchDetector != null) {
+            // 根据灵敏度调整检测阈值
+            float threshold = 0.15f * (2 - sensitivity);
+            // 应用阈值到检测器
+            pitchDetector.setProbabilityThreshold(threshold);
         }
     }
 
