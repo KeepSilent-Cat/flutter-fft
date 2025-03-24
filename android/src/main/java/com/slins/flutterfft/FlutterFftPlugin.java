@@ -290,7 +290,7 @@ public class FlutterFftPlugin implements ActivityAware, FlutterPlugin, PluginReg
   }
 
   @Override
-  public void setSensitivity(Float sensitivity, Result result) {
+  public void setSensitivity(float sensitivity, Result result) {
     pitchModel.setSensitivity(sensitivity);
     result.success("Sensitivity set to: " + sensitivity);
   }
