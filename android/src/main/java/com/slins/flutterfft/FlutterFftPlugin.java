@@ -177,7 +177,7 @@ public class FlutterFftPlugin implements ActivityAware, FlutterPlugin, PluginReg
 
   @RequiresApi(api = Build.VERSION_CODES.N)
   @Override
-  public void startRecorder(List<Object> tuning, Integer numChannels, Integer sampleRate, int androidAudioSource, Float tolerance, final Result result) { // START RECORDING
+  public void startRecorder(List<Object> tuning, Integer numChannels, Integer sampleRate, int androidAudioSource, Float tolerance, Float sensitivity, final Result result) { // START RECORDING
       checkIfPermissionGranted(); // CHECKS IF PERMISSION IS GRANTED
 
       if (!doneBefore) {
@@ -191,7 +191,7 @@ public class FlutterFftPlugin implements ActivityAware, FlutterPlugin, PluginReg
           }
       }
 
-      initializeAudioRecorder(result, tuning, sampleRate, numChannels, androidAudioSource, tolerance); // INITIALIZE THE AUDIO RECORDER
+      initializeAudioRecorder(result, tuning, sampleRate, numChannels, androidAudioSource, tolerance , sensitivity); // INITIALIZE THE AUDIO RECORDER
 
       audioModel.getAudioRecorder().startRecording(); // START THE AUDIO RECORDER
       recordHandler.removeCallbacksAndMessages(null);
@@ -250,7 +250,7 @@ public class FlutterFftPlugin implements ActivityAware, FlutterPlugin, PluginReg
   }
 
   @Override
-  public void initializeAudioRecorder(Result result, List<Object> tuning, Integer sampleRate, Integer numChannels, int androidAudioSource, Float tolerance) {
+  public void initializeAudioRecorder(Result result, List<Object> tuning, Integer sampleRate, Integer numChannels, int androidAudioSource, Float tolerance, Float sensitivity) {
       if (audioModel.getAudioRecorder() == null) { // IF THE AUDIO RECORDER IS NOT NULL, IN OTHER WORDS, NOT ALREADY RUNNING, WE START IT
           bufferSize = 0;
 
@@ -262,6 +262,7 @@ public class FlutterFftPlugin implements ActivityAware, FlutterPlugin, PluginReg
                   audioModel.setAudioData(new short[bufferSize / 2]); // AUDIO BUFFER INSTANTIATION
                   pitchModel.setPitchDetector(new FastYin(sampleRate, bufferSize / 2)); // PITCH DETECTOR INSTANTIATION
                   pitchModel.setTolerance(tolerance);
+                  pitchModel.setSensitivity(sensitivity);  // 添加这行
                   pitchModel.setTuning(tuning);
               }
 
