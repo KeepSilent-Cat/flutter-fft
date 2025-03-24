@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import be.tarsos.dsp.pitch.FastYin;
 
 import be.tarsos.dsp.pitch.PitchDetector;
 import io.flutter.plugin.common.MethodChannel;
