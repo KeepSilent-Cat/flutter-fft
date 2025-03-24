@@ -5,7 +5,7 @@ import java.util.List;
 import io.flutter.plugin.common.MethodChannel;
 
 interface AudioInterface {
-    void startRecorder(List<Object> tuning, Integer numChannels, Integer sampleRate, int androidAudioSource, Float tolerance, MethodChannel.Result result);
+    void startRecorder(List<Object> tuning, Integer numChannels, Integer sampleRate, int androidAudioSource, Float tolerance, Float sensitivity, MethodChannel.Result result);
     void stopRecorder(MethodChannel.Result result);
     void setSubscriptionDuration(double sec, MethodChannel.Result result);
     void checkIfPermissionGranted();
