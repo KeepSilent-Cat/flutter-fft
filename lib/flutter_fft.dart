@@ -212,7 +212,7 @@ class FlutterFft {
   }
 
   /// Sets subscription duration, starts recorder from the platform channel, then sets up recorder stream
-  Future<String> startRecorder() async {
+  Future<String> startRecorder({double sensitivity = 0.7}) async {
     try {
       await _channel.invokeMethod("setSubscriptionDuration",
           <String, double>{'sec': this.getSubscriptionDuration});
@@ -232,6 +232,7 @@ class FlutterFft {
         'sampleRate': this.getSampleRate,
         'androidAudioSource': this.getAndroidAudioSource.value,
         'tolerance': this.getTolerance,
+        'sensitivity': sensitivity,  // 添加新的参数
       });
 
       _setRecorderCallback();
