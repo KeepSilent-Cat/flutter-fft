@@ -1,6 +1,7 @@
 package com.slins.flutterfft;
 
 import java.util.List;
+import be.tarsos.dsp.pitch.FastYin;
 
 import io.flutter.plugin.common.MethodChannel;
 
@@ -9,5 +10,5 @@ interface AudioInterface {
     void stopRecorder(MethodChannel.Result result);
     void setSubscriptionDuration(double sec, MethodChannel.Result result);
     void checkIfPermissionGranted();
-    void initializeAudioRecorder(MethodChannel.Result result, List<Object> tuning, Integer sampleRate, Integer numChannels, int androidAudioSource, Float tolerance);
+    void initializeAudioRecorder(MethodChannel.Result result, List<Object> tuning, Integer sampleRate, Integer numChannels, int androidAudioSource, Float tolerance, Float sensitivity);
 }
