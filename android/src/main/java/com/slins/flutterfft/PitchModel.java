@@ -42,6 +42,12 @@ public class PitchModel implements PitchInterface {
 
                 audioModel.getAudioRecorder().read(audioModel.getAudioData(), 0, FlutterFftPlugin.bufferSize / 2); // UPDATES AUDIO BUFFER TO THE CURRENT AUDIO DATA
 
+                // 在这里应用灵敏度
+                float[] floatData = new float[FlutterFftPlugin.bufferSize / 2];
+                for (int i = 0; i < audioModel.getAudioData().length; i++) {
+                    floatData[i] = audioModel.getAudioData()[i] * sensitivity;
+                }
+                
                 parseTuning();
 
                 ArrayList<Object> returnData = new ArrayList<>(); // VARIABLE THAT WILL CONTAIN THE DATA TO BE RETURNED TO FLUTTER
@@ -103,17 +109,6 @@ public class PitchModel implements PitchInterface {
             return;
 //            Log.d(TAG, "Error there: " + e.toString());
 //            result.error(FlutterFftPlugin.ERROR_FAILED_RECORDER_UPDATE, "Failed to update recorder: " + e.toString(), null);
-        }
-    }
-
-    public void setSensitivity(float sensitivity) {
-        this.sensitivity = sensitivity;
-         // 使用灵敏度调整音频处理参数
-        if (pitchDetector != null) {
-            // 使用灵敏度调整音频处理的采样窗口大小
-            int windowSize = (int)(1024 * (2 - sensitivity));
-            // 重新初始化检测器
-            pitchDetector = new PitchDetector(sampleRate, windowSize);
         }
     }
 
