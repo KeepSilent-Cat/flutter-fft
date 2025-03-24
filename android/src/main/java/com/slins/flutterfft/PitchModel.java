@@ -22,6 +22,7 @@ public class PitchModel implements PitchInterface {
     public static final String ERROR_DATA_FAILURE = "ERROR_DATA_FAILURE";
     public static final String ERROR_FAILED_FREQUENCY_DATA_PROCESSING = "ERROR_FAILED_FREQUENCY_DATA_PROCESSING";
 
+    private float sensitivity = 0.7f;  // 添加灵敏度
     private float tolerance; // TOLERANCE IN HERTZ, AS IN HOW MANY HERTZ APART FROM THE PERFECT FREQUENCY THE NOTE IS TO BE CONSIDERED ON PITCH
     private List<Object> tuning;
     private ArrayList<Pair<String, Integer>> tuningData = new ArrayList<Pair<String, Integer>>();
@@ -101,6 +102,14 @@ public class PitchModel implements PitchInterface {
             return;
 //            Log.d(TAG, "Error there: " + e.toString());
 //            result.error(FlutterFftPlugin.ERROR_FAILED_RECORDER_UPDATE, "Failed to update recorder: " + e.toString(), null);
+        }
+    }
+
+    public void setSensitivity(float sensitivity) {
+        this.sensitivity = sensitivity;
+        // 根据灵敏度调整 FastYin 检测器的阈值
+        if (pitchDetector != null && pitchDetector instanceof FastYin) {
+            ((FastYin) pitchDetector).setThreshold(0.15f * (2 - sensitivity));
         }
     }
 
