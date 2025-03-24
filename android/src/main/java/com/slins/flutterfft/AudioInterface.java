@@ -10,4 +10,5 @@ interface AudioInterface {
     void setSubscriptionDuration(double sec, MethodChannel.Result result);
     void checkIfPermissionGranted();
     void initializeAudioRecorder(MethodChannel.Result result, List<Object> tuning, Integer sampleRate, Integer numChannels, int androidAudioSource, Float tolerance, Float sensitivity);
+    void setSensitivity(float sensitivity, Result result);
 }
