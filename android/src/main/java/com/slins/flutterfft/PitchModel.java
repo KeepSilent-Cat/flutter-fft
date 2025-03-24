@@ -110,10 +110,10 @@ public class PitchModel implements PitchInterface {
         this.sensitivity = sensitivity;
          // 使用灵敏度调整音频处理参数
         if (pitchDetector != null) {
-            // 根据灵敏度调整检测阈值
-            float threshold = 0.15f * (2 - sensitivity);
-            // 应用阈值到检测器
-            pitchDetector.setProbabilityThreshold(threshold);
+            // 使用灵敏度调整音频处理的采样窗口大小
+            int windowSize = (int)(1024 * (2 - sensitivity));
+            // 重新初始化检测器
+            pitchDetector = new PitchDetector(sampleRate, windowSize);
         }
     }
 
